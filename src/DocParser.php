@@ -9,7 +9,7 @@
 // | Author: 程立弘 <1019759208@qq.com>©️
 // +----------------------------------------------------------------------
 
-namespace Lsclh\Apidoc;
+namespace Lsclh\ApiDoc;
 
 
 use EasySwoole\Component\Singleton;

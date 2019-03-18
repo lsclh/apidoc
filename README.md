@@ -59,7 +59,7 @@ class User
  */
 
 
-use Lsclh\Apidoc\ApiDoc;
+use Lsclh\ApiDoc\ApiDoc;
 define('EASYSWOOLE_ROOT', realpath(getcwd()));
 $file = EASYSWOOLE_ROOT.'/vendor/autoload.php';
 if (file_exists($file)) {
