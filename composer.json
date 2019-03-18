@@ -1,0 +1,18 @@
+{
+    "autoload": {
+    	"psr-4": {
+        	"Lsclh\\ApiDoc\\": "src/"
+		}
+    },
+    "name": "lsclh/apidoc",
+    "description": "根据fastadmin的文档自动生成思想,借用其模版适配给easyswoole3.x使用的接口文档自动生成工具",
+    "type": "library",
+    "authors": [
+        {
+            "name": "cheng",
+            "email": "1019759208@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
