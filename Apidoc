@@ -29,7 +29,7 @@ if (file_exists($file)) {
 
 $args = $argv; //获取php启动后面的参数
 
-array_shift($args); //删除调用名称
+array_shift($args); //删除调用名称 
 
 if (!isset($args[0])) die('控制器接口目录不存在'); // 控制器（当前目录下出发 到目录 如 App/HttpController/Api）
 
