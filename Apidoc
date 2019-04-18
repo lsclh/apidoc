@@ -1,0 +1,57 @@
+#!/usr/bin/env php
+<?php
+
+// +----------------------------------------------------------------------
+// | Created by PhpStorm.©️
+// +----------------------------------------------------------------------
+// | User: 程立弘©️
+// +----------------------------------------------------------------------
+// | Date: 2019-03-02 23:48
+// +----------------------------------------------------------------------
+// | Author: 程立弘 <1019759208@qq.com>©️
+// +----------------------------------------------------------------------
+
+
+/**
+ * 使用方法
+ * php7 ApiDoc
+ */
+
+
+
+define('EASYSWOOLE_ROOT', __DIR__); //文件所在目录
+$file = EASYSWOOLE_ROOT.'/vendor/autoload.php';
+if (file_exists($file)) {
+    require $file;
+}else{
+    die("include composer autoload.php fail".PHP_EOL);
+}
+
+$args = $argv; //获取php启动后面的参数
+
+array_shift($args); //删除调用名称
+
+if (!isset($args[0])) die('控制器接口目录不存在'); // 控制器（当前目录下出发 到目录 如 App/HttpController/Api）
+
+if (!isset($args[1])) die('文件名不存在'); // 文件名 （如 Api.html）
+
+if (!isset($args[2])) die('存放文件目录地址不存在'); //文件存放地址（到目录+/ 如 Temp/ApiDoc/）
+
+$args[3] = isset($args[3]) ? $args[3] : 'EasySwoole';
+
+$args[4] = isset($args[4]) ? $args[4] : '开发人员';
+
+
+
+
+
+
+//参数1表示接口地址目录
+//参数2表示文档名称
+//参数3表示保存到那个目录下
+
+$res = (new \Lsclh\ApiDoc\ApiDoc($args[3],$args[4]))->getApiDoc($args[0],$args[1],$args[2]);
+if($res) die('生成成功'.PHP_EOL);
+die('生成失败'.PHP_EOL);
+
+?>

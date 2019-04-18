@@ -12,7 +12,6 @@
 namespace Lsclh\ApiDoc;
 
 
-use EasySwoole\Component\Singleton;
 
 /**
  * Parses the PHPDoc comments for metadata. Inspired by Documentor code base
@@ -26,7 +25,15 @@ use EasySwoole\Component\Singleton;
  * @link       https://github.com/murraypicton/Doqumentor
  */
 class DocParser {
-    use Singleton; //引入单例模式
+    private static $instance;
+
+    static function getInstance(...$args)
+    {
+        if(!isset(self::$instance)){
+            self::$instance = new static(...$args);
+        }
+        return self::$instance;
+    }
 
     private $params = array ();
     function parse($doc = '') {

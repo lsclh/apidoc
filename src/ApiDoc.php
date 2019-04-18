@@ -11,8 +11,6 @@
 
 namespace Lsclh\ApiDoc;
 
-use EasySwoole\Utility\File;
-
 /**
  * 获取Api文档
  * Class CreatApiDos
@@ -34,7 +32,7 @@ class ApiDoc
      */
     public function getApiDoc($dir = 'App/HttpController/Api',$apiName="Api.html",$filePutPath = EASYSWOOLE_ROOT.'/Temp/'){
 
-        $file = File::scanDirectory(EASYSWOOLE_ROOT.'/'.$dir);
+        $file = $this->scanDirectory(EASYSWOOLE_ROOT.'/'.$dir);
         $fileArr = [];
         foreach ($file['files'] as $k=>$v) $fileArr[] = explode($dir.'/',$v)[1];
         $docArr = [];
@@ -102,6 +100,45 @@ class ApiDoc
             }
         }
         return $this->file_put($docArr,$apiName,$filePutPath); //适配好的数据 进行套模版
+    }
+
+
+
+    /**
+     * 遍历目录
+     * @param string $dirPath
+     * @return array|bool
+     * @author : evalor <master@evalor.cn>
+     */
+    private function scanDirectory($dirPath)
+    {
+        if (!is_dir($dirPath)) return false;
+        $dirPath = realpath($dirPath) . '/';
+        $dirs = array( $dirPath );
+
+        $fileContainer = array();
+        $dirContainer = array();
+
+        try {
+            do {
+                $workDir = array_pop($dirs);
+                $scanResult = scandir($workDir);
+                foreach ($scanResult as $files) {
+                    if ($files == '.' || $files == '..') continue;
+                    $realPath = $workDir . $files;
+                    if (is_dir($realPath)) {
+                        array_push($dirs, $realPath . '/');
+                        $dirContainer[] = $realPath;
+                    } elseif (is_file($realPath)) {
+                        $fileContainer[] = $realPath;
+                    }
+                }
+            } while ($dirs);
+        } catch (\Throwable $throwable) {
+            return false;
+        }
+
+        return [ 'files' => $fileContainer, 'dirs' => $dirContainer ];
     }
 
 

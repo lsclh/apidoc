@@ -46,36 +46,7 @@ class User
 ```
 
 
-###创建的文件
-```php
-//在easyswoole启动目录下创建文件ApiDoc
-
-
-#!/usr/bin/env php
-<?php
-/**
- * 使用方法
- * php ApiDoc
- */
-
-
-use Lsclh\ApiDoc\ApiDoc;
-define('EASYSWOOLE_ROOT', realpath(getcwd()));
-$file = EASYSWOOLE_ROOT.'/vendor/autoload.php';
-if (file_exists($file)) {
-    require $file;
-}else{
-    die("include composer autoload.php fail".PHP_EOL);
-}
-
-//参数1表示接口地址目录
-//参数2表示文档名称
-//参数3表示保存到那个目录下
-$res = (new ApiDoc('EasySwoole','You Name'))->getApiDoc('App/HttpController/Api','Api.html',EASYSWOOLE_ROOT.'/Temp/');
-if($res) die('生成成功'.PHP_EOL);
-die('生成失败'.PHP_EOL);
-
-?>
-
-
-```
+###使用方法
+>1 复制目录下的ApiDoc 到启动目录
+>
+>2 修改或直接使用命令行生成 php7 ApiDoc App/HttpController/Api Api.html /Temp/ApiDoc/ 项目名 作者
